@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph Koller</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        section.background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://assets.community.lomography.com/67/ce16db007f13afe427b8adbdcca12ece80b20d/1216x813x2.jpg?auth=bad499e3336418d8ac58109a34b54ece33255e47') center/cover no-repeat;
+            z-index: -1; /* Send it to the back */
+            filter: blur(10px); /* Initial blur */
+            transition: filter 0.5s;
+        }
+
+        section.front-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: opacity 0.5s;
+            color: #fff; /* Text color set to white */
+            font-family: 'Times New Roman', Times, serif; /* Font set to Times New Roman */
+        }
+
+        section.portfolio {
+            padding: 3em;
+            text-align: center;
+            opacity: 0; /* Initially hidden */
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .portfolio img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 1em 0;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="background"></section>
+
+    <section class="front-page">
+        <h1>Joseph Koller</h1>
+        <p>Photography</p>
+    </section>
+
+    <section class="portfolio">
+        <!-- Portfolio Image 1 -->
+        <img src="https://assets.community.lomography.com/8e/9fd727284b071e644f2d3bae32db55430400d9/1216x813x2.jpg?auth=8a6ce0ffcb2dc7646957631e481ff102a4505a35" alt="Project 1">
+
+        <!-- Portfolio Image 2 -->
+        <img src="https://assets.community.lomography.com/bd/a7da4654c7aae89120278971c20be9a9bea59b/1216x922x2.jpg?auth=d8126d8b6d4c70feb99107ec3a306cfe99ee188a" alt="Project 2">
+
+        <!-- Portfolio Image 3 -->
+        <img src="https://assets.community.lomography.com/b3/d5bcbf46c6f09fd0d9a7762d7ec6f2749735ff/2052x3040x2.jpg?auth=4ab2f5467f27a70631af74290baa3605fca9c09f" alt="Project 3">
+
+        <!-- Portfolio Image 4 -->
+        <img src="https://assets.community.lomography.com/4a/66f5c249b8e97eb3509b45bac6827c4a7545e7/1216x835x2.jpg?auth=e79bbf062cf892246c55061ecb3764651d0e50de" alt="Project 4">
+        
+        <!-- Add more portfolio images as needed -->
+    </section>
+
+    <script>
+        // Smooth scrolling animation
+        document.addEventListener('DOMContentLoaded', function () {
+            const background = document.querySelector('.background');
+            const frontPage = document.querySelector('.front-page');
+            const portfolio = document.querySelector('.portfolio');
+
+            window.addEventListener('scroll', function () {
+                const scrollPos = window.scrollY;
+
+                // Background blur
+                const blurAmount = Math.min(scrollPos / frontPage.offsetHeight * 10, 10); // Adjust the multiplier for the blur intensity
+                background.style.filter = `blur(${blurAmount}px)`;
+
+                // Front page text fade
+                frontPage.style.opacity = 1 - scrollPos / frontPage.offsetHeight;
+
+                // Portfolio animation
+                const portfolioPos = portfolio.offsetTop - window.innerHeight + portfolio.offsetHeight / 2;
+                if (scrollPos > portfolioPos) {
+                    portfolio.style.opacity = 1;
+                    portfolio.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
